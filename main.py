@@ -7,7 +7,7 @@ from git import Repo
 from urllib.request import urlopen
 
 g = Github(GIT_TOKEN)
-repo = Repo("DigitalConcern/wildhack")
+repo = Repo("wildhack")
 
 commit_message = '1'
 
