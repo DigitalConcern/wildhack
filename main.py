@@ -12,13 +12,13 @@ logger.setLevel(logging.DEBUG)
 
 
 @bot.message_handler(commands=["start"])
-def start(m, res=False, ctr=0):
+def start(m, res=False):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item_yes = types.KeyboardButton('Yes')
     item_no = types.KeyboardButton('No')
     item_so = types.KeyboardButton('So-So')
     markup.add(item_yes, item_no, item_so)
-    img = open(f'data/{files_list[ctr]}', 'rb')
+    img = open(f'data/{files_list[0]}', 'rb')
     bot.send_photo(m.chat.id, img, reply_markup=markup)
 
 
@@ -26,12 +26,12 @@ def start(m, res=False, ctr=0):
 def handle_text(message: types.Message):
     if message.text == 'Yes':
         shutil.move(f'data/{files_list[0]}', f'data_sorted/')
-        files_list.pop()
+        files_list.pop(0)
     if message.text == 'So-So':
         shutil.move(f'data/{files_list[0]}', f'data_so-so/')
-        files_list.pop()
+        files_list.pop(0)
     if message.text == 'No':
-        files_list.pop()
+        files_list.pop(0)
     img = open(f'data/{files_list[0]}', 'rb')
     bot.send_photo(message.from_user.id, img)
 
