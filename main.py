@@ -1,12 +1,22 @@
-import telebot, os, shutil
+import telebot, os, shutil, logging, json
 from telebot import types
 from config import *
 from flask import Flask, request
-import logging
+from github import Github
+from git import Repo
+from urllib.request import urlopen
 
-bot = telebot.TeleBot(TOKEN)
+g = Github(GIT_TOKEN)
+repo = Repo("DigitalConcern/wildhack")
+
+commit_message = '1'
+
 files_list = os.listdir(path)
+
+bot = telebot.TeleBot(BOT_TOKEN)
+
 server = Flask(__name__)
+
 logger = telebot.logger
 logger.setLevel(logging.DEBUG)
 
@@ -25,10 +35,16 @@ def start(m, res=False):
 @bot.message_handler(content_types=["text"])
 def handle_text(message: types.Message):
     if message.text == 'Yes':
-        shutil.move(f'data/{files_list[0]}', f'data_sorted/')
+        repo.index.add(f'data/{files_list[0]}')
+        repo.index.commit(commit_message)
+        origin = repo.remote('origin')
+        origin.push()
         files_list.pop(0)
     if message.text == 'So-So':
-        shutil.move(f'data/{files_list[0]}', f'data_so-so/')
+        repo.index.add(f'data_so-so/{files_list[0]}')
+        repo.index.commit(commit_message)
+        origin = repo.remote('origin')
+        origin.push()
         files_list.pop(0)
     if message.text == 'No':
         files_list.pop(0)
@@ -36,7 +52,7 @@ def handle_text(message: types.Message):
     bot.send_photo(message.from_user.id, img)
 
 
-@server.route(f'/{TOKEN}', methods=['POST'])
+@server.route(f'/{BOT_TOKEN}', methods=['POST'])
 def redirect_message():
     json_string = request.get_data().decode('utf-8')
     update = telebot.types.Update.de_json(json_string)
