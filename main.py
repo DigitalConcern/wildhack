@@ -25,5 +25,4 @@ def handle_text(message: types.Message, ctr):
     bot.send_photo(message.from_user.id, img)
 
 
-if __name__ == '__main__':
-    bot.infinity_polling()
+bot.infinity_polling()
