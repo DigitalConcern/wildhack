@@ -25,10 +25,10 @@ def start(m, res=False, ctr=0):
 @bot.message_handler(content_types=["text"])
 def handle_text(message: types.Message):
     if message.text == 'Yes':
-        shutil.move(f'data/{files_list[0]}', f'data_sorted/{files_list[0]}')
+        shutil.move(f'data/{files_list[0]}', f'data_sorted/')
         files_list.pop()
     if message.text == 'So-So':
-        shutil.move(f'data/{files_list[0]}', f'data_so-so/{files_list[0]}')
+        shutil.move(f'data/{files_list[0]}', f'data_so-so/')
         files_list.pop()
     if message.text == 'No':
         files_list.pop()
