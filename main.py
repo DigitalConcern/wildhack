@@ -24,6 +24,5 @@ def handle_text(message: types.Message, ctr):
     img = open(f'data/{files_list[ctr]}')
     bot.send_photo(message.from_user.id, img)
 
-
 if __name__ == '__main__':
     bot.polling(none_stop=True)
