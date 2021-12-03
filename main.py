@@ -16,17 +16,23 @@ def start(m, res=False, ctr=0):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item_yes = types.KeyboardButton('Yes')
     item_no = types.KeyboardButton('No')
-    markup.add(item_yes, item_no)
+    item_so = types.KeyboardButton('So-So')
+    markup.add(item_yes, item_no, item_so)
     img = open(f'data/{files_list[ctr]}', 'rb')
     bot.send_photo(m.chat.id, img, reply_markup=markup)
 
 
 @bot.message_handler(content_types=["text"])
-def handle_text(message: types.Message, ctr):
+def handle_text(message: types.Message):
     if message.text == 'Yes':
-        shutil.copy(f'data/{files_list[ctr]}', f'data_sorted/{files_list[ctr]}')
-    ctr += 1
-    img = open(f'data/{files_list[ctr]}', 'rb')
+        shutil.move(f'data/{files_list[0]}', f'data_sorted/{files_list[0]}')
+        files_list.pop()
+    if message.text == 'So-So':
+        shutil.move(f'data/{files_list[0]}', f'data_so-so/{files_list[0]}')
+        files_list.pop()
+    if message.text == 'No':
+        files_list.pop()
+    img = open(f'data/{files_list[0]}', 'rb')
     bot.send_photo(message.from_user.id, img)
 
 
