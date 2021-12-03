@@ -18,7 +18,7 @@ def start(m, res=False, ctr=0):
     item_no = types.KeyboardButton('No')
     markup.add(item_yes, item_no)
     img = open(f'data/{files_list[ctr]}')
-    bot.send_photo(m.from_user.id, img, reply_markup=markup)
+    bot.send_photo(m.chat.id, img, reply_markup=markup)
 
 
 @bot.message_handler(content_types=["text"])
