@@ -17,7 +17,7 @@ def start(m, res=False, ctr=0):
     item_yes = types.KeyboardButton('Yes')
     item_no = types.KeyboardButton('No')
     markup.add(item_yes, item_no)
-    img = open(f'data/{files_list[ctr]}')
+    img = open(f'data/{files_list[ctr]}', 'rb')
     bot.send_photo(m.chat.id, img, reply_markup=markup)
 
 
@@ -26,7 +26,7 @@ def handle_text(message: types.Message, ctr):
     if message.text == 'Yes':
         shutil.copy(f'data/{files_list[ctr]}', f'data_sorted/{files_list[ctr]}')
     ctr += 1
-    img = open(f'data/{files_list[ctr]}')
+    img = open(f'data/{files_list[ctr]}', 'rb')
     bot.send_photo(message.from_user.id, img)
 
 
