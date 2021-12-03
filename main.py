@@ -1,9 +1,14 @@
 import telebot, os, shutil
 from telebot import types
 from config import *
+from flask import Flask, request
+import logging
 
 bot = telebot.TeleBot(TOKEN)
 files_list = os.listdir(path)
+server = Flask(__name__)
+logger = telebot.logger
+logger.setLevel(logging.DEBUG)
 
 
 @bot.message_handler(commands=["start"])
@@ -25,4 +30,7 @@ def handle_text(message: types.Message, ctr):
     bot.send_photo(message.from_user.id, img)
 
 
-bot.infinity_polling()
+if __name__ == '__main__':
+    bot.remove_webhook()
+    bot.set_webhook(url=APP_URL)
+    server.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
