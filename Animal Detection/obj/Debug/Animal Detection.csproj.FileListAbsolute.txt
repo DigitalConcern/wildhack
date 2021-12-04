@@ -65,3 +65,5 @@ C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Script
 C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection.csproj.CopyComplete
 D:\Документы\MihaREP\wildhack\Animal Detection\obj\Debug\Animal_Detection.Form2.resources
 D:\Документы\MihaREP\wildhack\Animal Detection\obj\Debug\Animal_Detection.Form3.resources
+C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal_Detection.Form2.resources
+C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal_Detection.Form3.resources

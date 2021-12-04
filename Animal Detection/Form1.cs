@@ -15,8 +15,6 @@ using System.Windows;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using System.Diagnostics;
-
-
 namespace Animal_Detection
 {
    
@@ -29,10 +27,10 @@ namespace Animal_Detection
         {
             
             InitializeComponent();
-            treeView1.BeforeSelect += treeView1_BeforeSelect;
-            treeView1.BeforeExpand += treeView1_BeforeExpand;
+            //treeView1.BeforeSelect += treeView1_BeforeSelect;
+            //treeView1.BeforeExpand += treeView1_BeforeExpand;
             // заполняем дерево дисками
-            FillDriveNodes();
+            //FillDriveNodes();
 
             
         }
@@ -286,7 +284,7 @@ namespace Animal_Detection
             fullPath += "\\" + NewSelected.FocusedItem.Text;
         }
 
-
+        
 
         /// <summary>
         /// обработчик события кнопки
@@ -319,7 +317,22 @@ namespace Animal_Detection
                // Запускает пост-обработочную сортировку
 
         }
+        public void загрузитьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path_1 = dialog.SelectedPath;
+                    string f = "Папка:   ";
+                    textBox1.Text = f + System.IO.Path.GetFileName(dialog.SelectedPath).ToString();
+                    fullPath = path_1;
+                    button1.Enabled = true;
+                }
+            }
 
-        
+        }
+
+
     }
 }
