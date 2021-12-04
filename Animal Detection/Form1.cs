@@ -24,9 +24,12 @@ namespace Animal_Detection
 
         public Form1()
         {
+            
             InitializeComponent();
             PopulateTreeView();
-// PopulateTreeView1();
+            
+
+            // PopulateTreeView1();
         }
         public void PyLaunch()
         {
@@ -215,12 +218,10 @@ namespace Animal_Detection
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             string path = null;
-            using (var dialog = new FolderBrowserDialog())
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)        //Диалог выбора каталога
-                    path = dialog.SelectedPath;
+            //path = listView1.Items;
 
             InsertFiles(path); // Инсертит в БД
 
