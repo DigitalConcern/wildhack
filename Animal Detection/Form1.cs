@@ -14,11 +14,14 @@ namespace Animal_Detection
     {
         public Form1()
         {
+            
             InitializeComponent();
             PopulateTreeView();
-// PopulateTreeView1();
-        }
+            
 
+            // PopulateTreeView1();
+        }
+        
         private void PopulateTreeView()
         {
             TreeNode rootNode;
@@ -97,6 +100,10 @@ namespace Animal_Detection
             }
 
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+        public void Button_activate()
+        {
+
         }
     }
 }

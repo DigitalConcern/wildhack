@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 
 namespace Animal_Detection
@@ -33,10 +34,6 @@ namespace Animal_Detection
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Имя"}, -1, System.Drawing.Color.Empty, System.Drawing.SystemColors.HotTrack, null);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Тип");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Последние изменения");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -65,6 +62,7 @@ namespace Animal_Detection
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "icons8-папка-16.png");
             this.imageList1.Images.SetKeyName(1, "free-icon-docs-2235919.png");
+
             // 
             // tableLayoutPanel1
             // 
@@ -85,6 +83,7 @@ namespace Animal_Detection
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Enabled = false;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button1.Location = new System.Drawing.Point(673, 416);
             this.button1.Margin = new System.Windows.Forms.Padding(10, 10, 20, 10);
@@ -92,7 +91,8 @@ namespace Animal_Detection
             this.button1.Size = new System.Drawing.Size(107, 24);
             this.button1.TabIndex = 0;
             this.button1.Text = "Продолжить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
+            button1.Click += Button1_Click;
             // 
             // listView1
             // 
@@ -105,12 +105,6 @@ namespace Animal_Detection
             this.listView1.HideSelection = false;
             this.listView1.HotTracking = true;
             this.listView1.HoverSelection = true;
-            listViewItem1.Checked = true;
-            listViewItem1.StateImageIndex = 1;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(202, 3);
             this.listView1.Name = "listView1";
@@ -121,6 +115,7 @@ namespace Animal_Detection
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            listView1.GotFocus += new EventHandler(this.listView1_GotFocus);
             // 
             // columnHeader1
             // 
@@ -145,6 +140,16 @@ namespace Animal_Detection
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Button_activate();
+        }
+
+        private void listView1_GotFocus(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
         }
 
         #endregion
