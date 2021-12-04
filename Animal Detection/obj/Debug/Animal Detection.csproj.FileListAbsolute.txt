@@ -1,0 +1,9 @@
+C:\Users\mega2\source\repos\Animal Detection\bin\Debug\Animal Detection.exe
+C:\Users\mega2\source\repos\Animal Detection\bin\Debug\Animal Detection.pdb
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal Detection.csproj.AssemblyReference.cache
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal_Detection.Form1.resources
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal_Detection.Properties.Resources.resources
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal Detection.csproj.GenerateResource.cache
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal Detection.csproj.CoreCompileInputs.cache
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal Detection.exe
+C:\Users\mega2\source\repos\Animal Detection\obj\Debug\Animal Detection.pdb
