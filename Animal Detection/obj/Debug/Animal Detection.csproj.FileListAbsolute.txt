@@ -16,3 +16,22 @@ C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection
 C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection.csproj.CoreCompileInputs.cache
 C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection.exe
 C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection.pdb
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\wilDBase.mdf
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\wilDBase_log.ldf
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Animal Detection.exe.config
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.Modules.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.SQLite.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.Wpf.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Scripting.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.Modules.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.SQLite.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\IronPython.Wpf.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Scripting.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection.csproj.CopyComplete

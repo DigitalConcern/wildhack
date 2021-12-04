@@ -218,7 +218,7 @@ namespace Animal_Detection
         private void Button1_Click(object sender, EventArgs e)
         {
             string path = null;
-            //path = listView1.Items;
+            path = listView1.SelectedItems[0].Text;
 
             InsertFiles(path); // Инсертит в БД
 
