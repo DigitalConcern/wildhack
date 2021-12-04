@@ -36,7 +36,7 @@ namespace Animal_Detection
         {
             ScriptEngine engine = Python.CreateEngine();
             string filename = @"...\main.py";  //ФАЙЛ В ПАПКУ БИН
-            Task.Factory.StartNew(() => engine.ExecuteFile(filename);
+            Task.Factory.StartNew(() => engine.ExecuteFile(filename));
         }
         public void InsertFiles(string path)         //Инсертит в БД
         {
