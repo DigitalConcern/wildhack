@@ -313,9 +313,10 @@ namespace Animal_Detection
 
             } while (count != 0);
 
-            this.Visible = true;
+            Form3 form3 = new Form3(); ;
+            form3.Show();
 
-            SortFiles(path);   // Запускает пост-обработочную сортировку
+               // Запускает пост-обработочную сортировку
 
         }
 

@@ -16,6 +16,16 @@ namespace Animal_Detection
             InitializeComponent();
         }
 
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            string path = null;
+            path = fullPath;
+            SortFiles(path);
+
+            // Запускает пост-обработочную сортировку
+
+        }
         private void Form3_Load(object sender, EventArgs e)
         {
 
