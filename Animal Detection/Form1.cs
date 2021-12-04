@@ -34,7 +34,7 @@ namespace Animal_Detection
             // заполняем дерево дисками
             FillDriveNodes();
 
-            //PopulateTreeView1();
+            
         }
         public void exeLaunch()
         {
@@ -210,7 +210,10 @@ namespace Animal_Detection
         // событие перед выделением узла
         void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
+            ListViewItem item = null;
+            
             e.Node.Nodes.Clear();
+            listView1.Items.Clear();
             string[] dirs;
             try
             {
@@ -224,11 +227,19 @@ namespace Animal_Detection
                             TreeNode dirNode = new TreeNode(new DirectoryInfo(dirs[i]).Name);
                             FillTreeNode(dirNode, dirs[i]);
                             e.Node.Nodes.Add(dirNode);
+                            item = new ListViewItem(new DirectoryInfo(dirs[i]).Name, 0);
+                            
+                              
+                            listView1.Items.Add(item);
                         }
                     }
                 }
             }
             catch (Exception ex) { }
+
+            
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         private void FillTreeNode(TreeNode driveNode, string path)
         {
@@ -245,6 +256,8 @@ namespace Animal_Detection
             catch (Exception ex) { }
         }
 
+       
+        
         public string fullPath = "";
 
 
@@ -268,8 +281,9 @@ namespace Animal_Detection
         /// <param name="e"></param>
         private void listView1_AfterClick(object sender, EventArgs e)
         {
+            var NewSelected = ((ListView)sender);
             button1.Enabled = true;
-            fullPath += "\\" + listView1.SelectedItems[0].Text;
+            fullPath += "\\" + NewSelected.FocusedItem.Text;
         }
 
 
@@ -301,6 +315,7 @@ namespace Animal_Detection
             SortFiles(path);   // Запускает пост-обработочную сортировку
 
         }
-       
+
+        
     }
 }

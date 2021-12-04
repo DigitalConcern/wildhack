@@ -144,6 +144,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources_Image\bear.png" />
     <Content Include="wilDBase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
