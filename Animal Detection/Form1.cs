@@ -20,7 +20,7 @@ namespace Animal_Detection
    
     public partial class Form1 : Form
     {
-        public string ConStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\wilDBase.mdf;Integrated Security=True";
+        public string ConStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=wilDBase.mdf;Integrated Security=True";
 
 
         public Form1()
@@ -28,7 +28,6 @@ namespace Animal_Detection
             
             InitializeComponent();
             PopulateTreeView();
-            
 
             PopulateTreeView1();
         }
@@ -36,7 +35,7 @@ namespace Animal_Detection
         {
             ScriptEngine engine = Python.CreateEngine();
             string filename = @"...\main.py";  //ФАЙЛ В ПАПКУ БИН
-            Task.Factory.StartNew(() => engine.ExecuteFile(filename);
+            Task.Factory.StartNew(() => engine.ExecuteFile(filename));
         }
         public void InsertFiles(string path)         //Инсертит в БД
         {
@@ -152,7 +151,9 @@ namespace Animal_Detection
             return count;
         }
 
-
+        /// <summary>
+        /// получает папки для рабочего стола в Tree
+        /// </summary>
         private void PopulateTreeView()
         {
             TreeNode rootNode;
@@ -166,6 +167,11 @@ namespace Animal_Detection
                 treeView1.Nodes.Add(rootNode);
             }
         }
+
+        /// <summary>
+        /// получает папки для диска С, нужна оптимизация (!)
+        /// </summary>
+        /// 
         private void PopulateTreeView1()
         {
             TreeNode rootNode;
@@ -180,6 +186,13 @@ namespace Animal_Detection
             }
         }
 
+
+        /// <summary>
+        /// вспомогательный метод для получения путей
+        /// </summary>
+        /// <param name="subDirs"></param>
+        /// <param name="nodeToAddTo"></param>
+        /// 
         private void GetDirectories(DirectoryInfo[] subDirs,TreeNode nodeToAddTo)
         {
             TreeNode aNode;
@@ -203,6 +216,13 @@ namespace Animal_Detection
                 catch (UnauthorizedAccessException ) { }
             }
         }
+
+
+        /// <summary>
+        /// строит папки в treeView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
@@ -238,16 +258,39 @@ namespace Animal_Detection
 
 
         public string fullPath = "";
+
+
+        /// <summary>
+        /// получает путь выбранного treeview элементa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode selectedNode = e.Node;
             fullPath = selectedNode.FullPath;
         }
+        
+
+
+        /// <summary>
+        /// получает полный путь, прибавляя имя выбраного файла в listview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listView1_AfterClick(object sender, EventArgs e)
         {
             button1.Enabled = true;
             fullPath += "\\" + listView1.SelectedItems[0].Text;
         }
+
+
+
+        /// <summary>
+        /// обработчик события кнопки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
             string path = null;
