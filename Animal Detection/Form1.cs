@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
 using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
+using Microsoft.Scripting.Hosting; 
 
 namespace Animal_Detection
 {
@@ -39,7 +39,10 @@ namespace Animal_Detection
             DirectoryInfo dir = new DirectoryInfo(path);
             List<string> files = new List<string>();
             foreach (FileInfo file in dir.GetFiles())                               //Перебираем файлы и запихиваем Адрес в Лист
-            {
+            {   if (file.Name.ToLowerInvariant().Contains(".avi") ||
+                    file.Name.ToLowerInvariant().Contains(".mov") ||
+                    file.Name.ToLowerInvariant().Contains(".jpg") ||
+                    file.Name.ToLowerInvariant().Contains(".jpeg"))
                 files.Add(file.FullName);
             }
 
