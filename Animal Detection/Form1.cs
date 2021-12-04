@@ -31,7 +31,7 @@ namespace Animal_Detection
             InitializeComponent();
             PopulateTreeView();
 
-            PopulateTreeView1();
+            //PopulateTreeView1();
         }
         public void exeLaunch()
         {
@@ -60,6 +60,13 @@ namespace Animal_Detection
 
             SqlConnection Conn = new SqlConnection(ConStr);
             Conn.Open();
+
+            using (var cmd = Conn.CreateCommand())
+            {
+                cmd.CommandText = "TRUNCATE TABLE vid";
+                cmd.ExecuteNonQuery();
+            }
+
             foreach (string filename in files)
             {
                 using (var cmd = Conn.CreateCommand())
