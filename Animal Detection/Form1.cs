@@ -20,16 +20,20 @@ namespace Animal_Detection
    
     public partial class Form1 : Form
     {
-        public string ConStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=wilDBase.mdf;Integrated Security=True";
+        public string ConStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\wilDBase.mdf;Integrated Security=True";
 
 
         public Form1()
         {
             
             InitializeComponent();
-            PopulateTreeView();
+            treeView1.BeforeSelect += treeView1_BeforeSelect;
+            treeView1.BeforeExpand += treeView1_BeforeExpand;
+            // заполняем дерево дисками
+            FillDriveNodes();
 
-            PopulateTreeView1();
+
+            //PopulateTreeView1();
         }
         public void PyLaunch()
         {
@@ -154,108 +158,78 @@ namespace Animal_Detection
         /// <summary>
         /// получает папки для рабочего стола в Tree
         /// </summary>
-        private void PopulateTreeView()
+        private void FillDriveNodes()
         {
-            TreeNode rootNode;
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            DirectoryInfo info = new DirectoryInfo(path);
-            if (info.Exists)
+            try
             {
-                rootNode = new TreeNode(info.Name);
-                rootNode.Tag = info;
-                GetDirectories(info.GetDirectories(), rootNode);
-                treeView1.Nodes.Add(rootNode);
-            }
-        }
-
-        /// <summary>
-        /// получает папки для диска С, нужна оптимизация (!)
-        /// </summary>
-        /// 
-        private void PopulateTreeView1()
-        {
-            TreeNode rootNode;
-            string path = @"C:\\";
-            DirectoryInfo info = new DirectoryInfo(path);
-            if (info.Exists)
-            {
-                rootNode = new TreeNode(info.Name);
-                rootNode.Tag = info;
-                GetDirectories(info.GetDirectories(), rootNode);
-                treeView1.Nodes.Add(rootNode);
-            }
-        }
-
-
-        /// <summary>
-        /// вспомогательный метод для получения путей
-        /// </summary>
-        /// <param name="subDirs"></param>
-        /// <param name="nodeToAddTo"></param>
-        /// 
-        private void GetDirectories(DirectoryInfo[] subDirs,TreeNode nodeToAddTo)
-        {
-            TreeNode aNode;
-            DirectoryInfo[] subSubDirs;
-            
-            foreach (DirectoryInfo subDir in subDirs)
-            {
-                aNode = new TreeNode(subDir.Name, 0, 0);
-                aNode.Tag = subDir;
-                aNode.ImageKey = "folder";
-
-                try
+                foreach (DriveInfo drive in DriveInfo.GetDrives())
                 {
-                    subSubDirs = subDir.GetDirectories();
-                    if (subSubDirs.Length != 0)
-                    {
-                        GetDirectories(subSubDirs, aNode);
-                    }
-                    nodeToAddTo.Nodes.Add(aNode);
+                    TreeNode driveNode = new TreeNode { Text = drive.Name };
+                    FillTreeNode(driveNode, drive.Name);
+                    treeView1.Nodes.Add(driveNode);
                 }
-                catch (UnauthorizedAccessException ) { }
             }
+            catch (Exception ex) { }
         }
-
-
-        /// <summary>
-        /// строит папки в treeView
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            TreeNode newSelected = e.Node;
-            listView1.Items.Clear();
-            DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
-
-            foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
+            e.Node.Nodes.Clear();
+            string[] dirs;
+            try
             {
-                item = new ListViewItem(dir.Name, 0);
-                subItems = new ListViewItem.ListViewSubItem[]
-                    {new ListViewItem.ListViewSubItem(item, "Directory"),
-             new ListViewItem.ListViewSubItem(item,
-                dir.LastAccessTime.ToShortDateString())};
-                item.SubItems.AddRange(subItems);
-                listView1.Items.Add(item);
+                if (Directory.Exists(e.Node.FullPath))
+                {
+                    dirs = Directory.GetDirectories(e.Node.FullPath);
+                    if (dirs.Length != 0)
+                    {
+                        for (int i = 0; i < dirs.Length; i++)
+                        {
+                            TreeNode dirNode = new TreeNode(new DirectoryInfo(dirs[i]).Name);
+                            FillTreeNode(dirNode, dirs[i]);
+                            e.Node.Nodes.Add(dirNode);
+                        }
+                    }
+                }
             }
-            foreach (FileInfo file in nodeDirInfo.GetFiles())
-            {
-                item = new ListViewItem(file.Name, 1);
-                subItems = new ListViewItem.ListViewSubItem[]
-                    { new ListViewItem.ListViewSubItem(item, "File"),
-             new ListViewItem.ListViewSubItem(item,
-                file.LastAccessTime.ToShortDateString())};
-
-                item.SubItems.AddRange(subItems);
-                listView1.Items.Add(item);
-            }
-
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            catch (Exception ex) { }
         }
-
+        // событие перед выделением узла
+        void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            e.Node.Nodes.Clear();
+            string[] dirs;
+            try
+            {
+                if (Directory.Exists(e.Node.FullPath))
+                {
+                    dirs = Directory.GetDirectories(e.Node.FullPath);
+                    if (dirs.Length != 0)
+                    {
+                        for (int i = 0; i < dirs.Length; i++)
+                        {
+                            TreeNode dirNode = new TreeNode(new DirectoryInfo(dirs[i]).Name);
+                            FillTreeNode(dirNode, dirs[i]);
+                            e.Node.Nodes.Add(dirNode);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
+        private void FillTreeNode(TreeNode driveNode, string path)
+        {
+            try
+            {
+                string[] dirs = Directory.GetDirectories(path);
+                foreach (string dir in dirs)
+                {
+                    TreeNode dirNode = new TreeNode();
+                    dirNode.Text = dir.Remove(0, dir.LastIndexOf("\\") + 1);
+                    driveNode.Nodes.Add(dirNode);
+                }
+            }
+            catch (Exception ex) { }
+        }
 
         public string fullPath = "";
 
