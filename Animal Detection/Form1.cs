@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
 using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
+using Microsoft.Scripting.Hosting; 
 
 namespace Animal_Detection
 {
@@ -35,14 +36,17 @@ namespace Animal_Detection
         {
             ScriptEngine engine = Python.CreateEngine();
             string filename = @"...\main.py";  //ФАЙЛ В ПАПКУ БИН
-            engine.ExecuteFile(filename);
+            Task.Factory.StartNew(() => engine.ExecuteFile(filename);
         }
         public void InsertFiles(string path)         //Инсертит в БД
         {
             DirectoryInfo dir = new DirectoryInfo(path);
             List<string> files = new List<string>();
             foreach (FileInfo file in dir.GetFiles())                               //Перебираем файлы и запихиваем Адрес в Лист
-            {
+            {   if (file.Name.ToLowerInvariant().Contains(".avi") ||
+                    file.Name.ToLowerInvariant().Contains(".mov") ||
+                    file.Name.ToLowerInvariant().Contains(".jpg") ||
+                    file.Name.ToLowerInvariant().Contains(".jpeg"))
                 files.Add(file.FullName);
             }
 
@@ -134,6 +138,20 @@ namespace Animal_Detection
             Conn.Close();
             return count2;
         }
+        public int DBcacpacity()
+        {
+            int count;
+            SqlConnection Conn = new SqlConnection(ConStr);
+            Conn.Open();
+            using (var cmd = Conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT  COUNT( * ) FROM  vid ";
+                count = Int32.Parse(cmd.ExecuteScalar().ToString());
+            }
+            Conn.Close();
+            return count;
+        }
+
 
         private void PopulateTreeView()
         {
@@ -239,10 +257,13 @@ namespace Animal_Detection
 
             PyLaunch();        // Запускет питоновский файл из Bin
 
+            int allDB = DBcacpacity();
             int count;
             do
             {
                 count = WaitNoNull();
+                System.Threading.Thread.Sleep(1000);
+
             } while (count != 0);
 
 
