@@ -63,3 +63,4 @@ C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Dynami
 C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Scripting.xml
 C:\Users\mega2\source\repos\wildhack\Animal Detection\bin\Debug\Microsoft.Scripting.Metadata.xml
 C:\Users\mega2\source\repos\wildhack\Animal Detection\obj\Debug\Animal Detection.csproj.CopyComplete
+D:\Документы\MihaREP\wildhack\Animal Detection\obj\Debug\Animal_Detection.Form2.resources

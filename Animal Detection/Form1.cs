@@ -299,8 +299,10 @@ namespace Animal_Detection
             path = fullPath;
 
             InsertFiles(path); // Инсертит в БД
-
-            PyLaunch();        // Запускет питоновский файл из Bin
+            Form2 form2=new Form2(); ;
+            form2.Show();
+            //PyLaunch();        // Запускет питоновский файл из Bin
+            this.Visible = false;
 
             int allDB = DBcacpacity();
             int count;
@@ -311,6 +313,7 @@ namespace Animal_Detection
 
             } while (count != 0);
 
+            this.Visible = true;
 
             SortFiles(path);   // Запускает пост-обработочную сортировку
 
