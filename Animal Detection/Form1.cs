@@ -29,7 +29,7 @@ namespace Animal_Detection
             PopulateTreeView();
             
 
-            // PopulateTreeView1();
+            PopulateTreeView1();
         }
         public void PyLaunch()
         {
@@ -162,8 +162,7 @@ namespace Animal_Detection
             }
         }
 
-        private void GetDirectories(DirectoryInfo[] subDirs,
-            TreeNode nodeToAddTo)
+        private void GetDirectories(DirectoryInfo[] subDirs,TreeNode nodeToAddTo)
         {
             TreeNode aNode;
             DirectoryInfo[] subSubDirs;
@@ -173,13 +172,17 @@ namespace Animal_Detection
                 aNode = new TreeNode(subDir.Name, 0, 0);
                 aNode.Tag = subDir;
                 aNode.ImageKey = "folder";
-                subSubDirs = subDir.GetDirectories();
-                if (subSubDirs.Length != 0)
-                {
-                     GetDirectories(subSubDirs, aNode);
-                }
-                nodeToAddTo.Nodes.Add(aNode);
 
+                try
+                {
+                    subSubDirs = subDir.GetDirectories();
+                    if (subSubDirs.Length != 0)
+                    {
+                        GetDirectories(subSubDirs, aNode);
+                    }
+                    nodeToAddTo.Nodes.Add(aNode);
+                }
+                catch (UnauthorizedAccessException ) { }
             }
         }
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -215,10 +218,22 @@ namespace Animal_Detection
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
+
+        public string fullPath = "";
+        public void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode selectedNode = e.Node;
+            fullPath = selectedNode.FullPath;
+        }
+        private void listView1_AfterClick(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            fullPath += "\\" + listView1.SelectedItems[0].Text;
+        }
         private void Button1_Click(object sender, EventArgs e)
         {
             string path = null;
-            path = listView1.SelectedItems[0].Text;
+            path = fullPath;
 
             InsertFiles(path); // Инсертит в БД
 
@@ -234,5 +249,6 @@ namespace Animal_Detection
             SortFiles(path);   // Запускает пост-обработочную сортировку
 
         }
+       
     }
 }

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3222bad3-c54c-4fe8-9719-1306935c24e4": {
+      "ProjectGuid": "3222bad3-c54c-4fe8-9719-1306935c24e4",
+      "DisplayName": "Animal Detection",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

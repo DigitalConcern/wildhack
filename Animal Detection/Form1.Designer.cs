@@ -42,6 +42,7 @@ namespace Animal_Detection
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,12 +50,12 @@ namespace Animal_Detection
             // 
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(2, 2);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(128, 247);
-            this.treeView1.TabIndex = 1;
+            this.treeView1.Size = new System.Drawing.Size(190, 378);
+            this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
             // imageList1
@@ -63,7 +64,6 @@ namespace Animal_Detection
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "icons8-папка-16.png");
             this.imageList1.Images.SetKeyName(1, "free-icon-docs-2235919.png");
-
             // 
             // tableLayoutPanel1
             // 
@@ -74,12 +74,11 @@ namespace Animal_Detection
             this.tableLayoutPanel1.Controls.Add(this.treeView1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.06195F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.93805F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(533, 292);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 449);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // button1
@@ -87,14 +86,13 @@ namespace Animal_Detection
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Enabled = false;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(449, 270);
-            this.button1.Margin = new System.Windows.Forms.Padding(7, 6, 13, 6);
+            this.button1.Location = new System.Drawing.Point(674, 415);
+            this.button1.Margin = new System.Windows.Forms.Padding(10, 9, 20, 9);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 16);
+            this.button1.Size = new System.Drawing.Size(106, 25);
             this.button1.TabIndex = 0;
             this.button1.Text = "Продолжить";
             this.button1.Click += new System.EventHandler(this.Button1_Click);
-
             // 
             // listView1
             // 
@@ -102,23 +100,23 @@ namespace Animal_Detection
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.HideSelection = false;
             this.listView1.HotTracking = true;
             this.listView1.HoverSelection = true;
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(134, 2);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listView1.Location = new System.Drawing.Point(202, 3);
             this.listView1.Name = "listView1";
             this.listView1.ShowGroups = false;
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(397, 247);
+            this.listView1.Size = new System.Drawing.Size(595, 380);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            listView1.GotFocus += new EventHandler(this.listView1_GotFocus);
+            this.listView1.Click += new System.EventHandler(this.listView1_AfterClick);
             // 
             // columnHeader1
             // 
@@ -132,13 +130,16 @@ namespace Animal_Detection
             // 
             this.columnHeader3.Text = "Дата изменения";
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Путь";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.ClientSize = new System.Drawing.Size(800, 559);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -148,10 +149,7 @@ namespace Animal_Detection
 
         
 
-        private void listView1_GotFocus(object sender, EventArgs e)
-        {
-            button1.Enabled = true;
-        }
+      
 
         #endregion
 
@@ -163,6 +161,7 @@ namespace Animal_Detection
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
     }
 }
 
