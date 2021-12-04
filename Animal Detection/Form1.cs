@@ -13,13 +13,15 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows;
 using IronPython.Hosting;
-using Microsoft.Scripting.Hosting; 
+using Microsoft.Scripting.Hosting;
+using System.Diagnostics;
+
 
 namespace Animal_Detection
 {
    
     public partial class Form1 : Form
-    {
+    {                                                                                                                        
         public string ConStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\wilDBase.mdf;Integrated Security=True";
 
 
@@ -32,15 +34,20 @@ namespace Animal_Detection
             // заполняем дерево дисками
             FillDriveNodes();
 
-
             //PopulateTreeView1();
+        }
+        public void exeLaunch()
+        {
+            Process.Start(@"...\python.exe");
         }
         public void PyLaunch()
         {
+
             ScriptEngine engine = Python.CreateEngine();
             string filename = @"...\main.py";  //ФАЙЛ В ПАПКУ БИН
             Task.Factory.StartNew(() => engine.ExecuteFile(filename));
         }
+
         public void InsertFiles(string path)         //Инсертит в БД
         {
             DirectoryInfo dir = new DirectoryInfo(path);
@@ -56,6 +63,13 @@ namespace Animal_Detection
 
             SqlConnection Conn = new SqlConnection(ConStr);
             Conn.Open();
+
+            using (var cmd = Conn.CreateCommand())
+            {
+                cmd.CommandText = "TRUNCATE TABLE vid";
+                cmd.ExecuteNonQuery();
+            }
+
             foreach (string filename in files)
             {
                 using (var cmd = Conn.CreateCommand())
