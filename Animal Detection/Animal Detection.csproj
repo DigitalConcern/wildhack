@@ -132,6 +132,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <None Include="frames_from_video\build\video_scan\Analysis-00.toc" />
+    <None Include="frames_from_video\build\video_scan\base_library.zip" />
+    <None Include="frames_from_video\build\video_scan\EXE-00.toc" />
+    <None Include="frames_from_video\build\video_scan\localpycos\struct.pyo" />
+    <None Include="frames_from_video\build\video_scan\PKG-00.toc" />
+    <None Include="frames_from_video\build\video_scan\PYZ-00.pyz" />
+    <None Include="frames_from_video\build\video_scan\PYZ-00.toc" />
+    <None Include="frames_from_video\build\video_scan\video_scan.exe.manifest" />
+    <None Include="frames_from_video\build\video_scan\video_scan.pkg" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,6 +171,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="frames_from_video\build\video_scan\warn-video_scan.txt" />
+    <Content Include="frames_from_video\build\video_scan\xref-video_scan.html" />
     <Content Include="Resources_Image\bear.png" />
     <Content Include="wilDBase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -170,6 +181,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>wilDBase.mdf</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="frames_from_video\build\—\" />
+    <Folder Include="frames_from_video\dist\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
