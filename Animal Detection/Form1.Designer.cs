@@ -52,6 +52,7 @@ namespace Animal_Detection
             // 
             // treeView1
             // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(4, 45);
@@ -60,7 +61,6 @@ namespace Animal_Detection
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(307, 495);
             this.treeView1.TabIndex = 0;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
@@ -149,7 +149,6 @@ namespace Animal_Detection
             this.загрузитьПапкуToolStripMenuItem.Name = "загрузитьПапкуToolStripMenuItem";
             this.загрузитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(235, 34);
             this.загрузитьПапкуToolStripMenuItem.Text = "Выбрать папку";
-            this.загрузитьПапкуToolStripMenuItem.Click += загрузитьПапкуToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
@@ -184,18 +183,17 @@ namespace Animal_Detection
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(997, 639);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Animal Detection";
-            this.SizeChanged += Form1_SizeChanged;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

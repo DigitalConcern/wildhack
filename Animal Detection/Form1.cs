@@ -36,11 +36,11 @@ namespace Animal_Detection
 
             
         }
-        public void exeLaunch()
-        {
-            string filename = @"D:\Документы\MihaREP\wildhack\Animal Detection\frames_from_video2\dist\video_scan.exe";
-            Process.Start(filename);
-        }
+        //public void exeLaunch()
+        //{
+         //   string filename = @"D:\Документы\MihaREP\wildhack\Animal Detection\frames_from_video2\dist\video_scan.exe";
+         //   Process.Start(filename);
+        //}
         public void PyLaunch()
         {
 
@@ -255,7 +255,7 @@ namespace Animal_Detection
             string path = null;
             path = fullPath;
             InsertFiles(path); // Инсертит в БД
-            exeLaunch();
+            //exeLaunch();
             Form2 form2=new Form2(); 
             form2.Show(); // Запускет питоновский файл из Bin
             form2.PB();
