@@ -101,17 +101,21 @@ namespace Animal_Detection
                 string p = words[2];
                 string addr = words[1];
                 FileInfo fileInf = new FileInfo(addr);
-
-                    switch (p)
+                char t = '\\';
+                switch (p)
                     {
+                    
                         case "T":
-                            if (fileInf.Exists) fileInf.CopyTo(goodPath);
-                            break;
+                        string gpath = goodPath+@"\"+addr.Trim().Split(t).Last();
+                        if (fileInf.Exists) fileInf.CopyTo(gpath);
+                        break;
                         case "F":
-                            if (fileInf.Exists) fileInf.CopyTo(badPath);
+                        string bpath = badPath + @"\" + addr.Trim().Split(t).Last();
+                        if (fileInf.Exists) fileInf.CopyTo(bpath);
                             break;
                         case "S":
-                            if (fileInf.Exists) fileInf.CopyTo(soPath);
+                        string spath = soPath + @"\" + addr.Trim().Split(t).Last();
+                        if (fileInf.Exists) fileInf.CopyTo(spath);
                             break;
                         default:
                             break;
@@ -274,9 +278,9 @@ namespace Animal_Detection
             {
                 System.Threading.Thread.Sleep(1000);
             }
-            Form3 form3 = new Form3(); ;
-            form3.Show();
-
+            //Form3 form3 = new Form3(); ;
+            //form3.Show();
+            SortFiles(path);
                // Запускает пост-обработочную сортировку
 
         }
