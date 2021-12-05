@@ -146,16 +146,16 @@ namespace Animal_Detection
             // 
             this.загрузитьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("загрузитьПапкуToolStripMenuItem.Image")));
             this.загрузитьПапкуToolStripMenuItem.Name = "загрузитьПапкуToolStripMenuItem";
-            this.загрузитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(235, 34);
+            this.загрузитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.загрузитьПапкуToolStripMenuItem.Text = "Выбрать папку";
-            this.загрузитьПапкуToolStripMenuItem.Click += загрузитьПапкуToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(235, 34);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // button1
             // 
