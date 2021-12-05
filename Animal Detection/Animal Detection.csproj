@@ -69,7 +69,7 @@
       <HintPath>packages\DynamicLanguageRuntime.1.2.1\lib\net40\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -132,15 +132,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <None Include="frames_from_video\build\video_scan\Analysis-00.toc" />
-    <None Include="frames_from_video\build\video_scan\base_library.zip" />
-    <None Include="frames_from_video\build\video_scan\EXE-00.toc" />
-    <None Include="frames_from_video\build\video_scan\localpycos\struct.pyo" />
-    <None Include="frames_from_video\build\video_scan\PKG-00.toc" />
-    <None Include="frames_from_video\build\video_scan\PYZ-00.pyz" />
-    <None Include="frames_from_video\build\video_scan\PYZ-00.toc" />
-    <None Include="frames_from_video\build\video_scan\video_scan.exe.manifest" />
-    <None Include="frames_from_video\build\video_scan\video_scan.pkg" />
+    <None Include="frames_from_video %282%29\build\video_scan\Analysis-00.toc" />
+    <None Include="frames_from_video %282%29\build\video_scan\base_library.zip" />
+    <None Include="frames_from_video %282%29\build\video_scan\EXE-00.toc" />
+    <None Include="frames_from_video %282%29\build\video_scan\localpycos\struct.pyo" />
+    <None Include="frames_from_video %282%29\build\video_scan\PKG-00.toc" />
+    <None Include="frames_from_video %282%29\build\video_scan\PYZ-00.pyz" />
+    <None Include="frames_from_video %282%29\build\video_scan\PYZ-00.toc" />
+    <None Include="frames_from_video %282%29\build\video_scan\video_scan.exe.manifest" />
+    <None Include="frames_from_video %282%29\build\video_scan\video_scan.pkg" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -171,8 +171,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="frames_from_video\build\video_scan\warn-video_scan.txt" />
-    <Content Include="frames_from_video\build\video_scan\xref-video_scan.html" />
+    <Content Include="frames_from_video %282%29\build\video_scan\warn-video_scan.txt" />
+    <Content Include="frames_from_video %282%29\build\video_scan\xref-video_scan.html" />
+    <Content Include="frames_from_video %282%29\dist\video_scan.exe" />
     <Content Include="Resources_Image\bear.png" />
     <Content Include="wilDBase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -183,8 +184,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="frames_from_video\build\—\" />
-    <Folder Include="frames_from_video\dist\" />
+    <Folder Include="frames_from_video %282%29\build\—\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

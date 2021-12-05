@@ -20,7 +20,9 @@ namespace Animal_Detection
    
     public partial class Form1 : Form
     {                                                                                                                        
-        public string ConStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\wilDBase.mdf;Integrated Security=True";
+       
+        string fpath = @"...\hta.txt";
+        string fpathres = @"...\res.txt";
 
 
         public Form1()
@@ -36,13 +38,14 @@ namespace Animal_Detection
         }
         public void exeLaunch()
         {
-            Process.Start(@"...\python.exe");
+            string filename = @"D:\Документы\MihaREP\wildhack\Animal Detection\frames_from_video2\dist\video_scan.exe";
+            Process.Start(filename);
         }
         public void PyLaunch()
         {
 
             ScriptEngine engine = Python.CreateEngine();
-            string filename = @"...\main.py";  //ФАЙЛ В ПАПКУ БИН
+            string filename = @"...\...\main.py";  //ФАЙЛ В ПАПКУ БИН
             Task.Factory.StartNew(() => engine.ExecuteFile(filename));
         }
 
@@ -58,26 +61,20 @@ namespace Animal_Detection
                 files.Add(file.FullName);
             }
 
-
-            SqlConnection Conn = new SqlConnection(ConStr);
-            Conn.Open();
-
-            using (var cmd = Conn.CreateCommand())
+            FileInfo fileInf = new FileInfo(fpath);
+            if (fileInf.Exists)
             {
-                cmd.CommandText = "TRUNCATE TABLE vid";
-                cmd.ExecuteNonQuery();
+                fileInf.Delete();
             }
-
+            System.IO.File.Create(fpath);
+            StreamWriter f = new StreamWriter(fpath);
+            int id = 0;
             foreach (string filename in files)
             {
-                using (var cmd = Conn.CreateCommand())
-                {
-                    cmd.CommandText = @"INSERT  vid (vid_addr) Values (@filename)";
-                    cmd.Parameters.AddWithValue("@filename", filename);
-                    cmd.ExecuteNonQuery();
-                }
+                string res = id.ToString() + ":"+ filename+":";
+                f.WriteLine(res); 
             }
-            Conn.Close();
+    
         }
 
 
@@ -85,87 +82,45 @@ namespace Animal_Detection
 
         public void SortFiles(string path)
         {
-            SqlConnection Conn = new SqlConnection(ConStr);
-            Conn.Open();
-            int count;
-            using (var cmd = Conn.CreateCommand())
-            {
-                cmd.CommandText = "SELECT  COUNT( * ) FROM  vid";
-                count = Int32.Parse(cmd.ExecuteScalar().ToString());
-            }
-
+    
+            int count= System.IO.File.ReadAllLines(fpath).Length;
             string goodPath = path + @"\Good";
             string badPath = path + @"\Bad";
             string soPath = path + @"\So-so";
             if (!Directory.Exists(goodPath)) Directory.CreateDirectory(goodPath);
             if (!Directory.Exists(badPath)) Directory.CreateDirectory(badPath);
             if (!Directory.Exists(soPath)) Directory.CreateDirectory(soPath);
-            for (int i = 1; i <= count; i++)
+            foreach (string str in System.IO.File.ReadLines(fpath))
             {
-                using (var cmd = Conn.CreateCommand())
-                {
-                    cmd.CommandText = "SELECT  vid_animal FROM  vid WHERE vid_id=@id";
-                    cmd.Parameters.AddWithValue("@id", i);
-                    char p = cmd.ExecuteScalar().ToString().First();
-
-                    cmd.CommandText = "SELECT  vid_addr FROM  vid WHERE vid_id=@id";
-                    cmd.Parameters.AddWithValue("@id", i);
-                    string addr = cmd.ExecuteScalar().ToString();
-                    FileInfo fileInf = new FileInfo(path);
+                string sub = str.Trim();
+                string[] words = str.Split(new char[] { ':' });
+                string p = words[2];
+                string addr = words[1];
+                FileInfo fileInf = new FileInfo(addr);
 
                     switch (p)
                     {
-                        case 'T':
+                        case "T":
                             if (fileInf.Exists) fileInf.CopyTo(goodPath);
                             break;
-                        case 'F':
+                        case "F":
                             if (fileInf.Exists) fileInf.CopyTo(badPath);
                             break;
-                        case 'S':
+                        case "S":
                             if (fileInf.Exists) fileInf.CopyTo(soPath);
                             break;
                         default:
                             break;
                     }
-                }
             }
 
-            using (var cmd = Conn.CreateCommand())
+            FileInfo fileInf1 = new FileInfo(fpath);
+            if (fileInf1.Exists)
             {
-                cmd.CommandText = "TRUNCATE TABLE vid";
-                cmd.ExecuteNonQuery();
+                fileInf1.Delete();
             }
-
-            Conn.Close();
         }
 
-
-        public int WaitNoNull()
-        {
-            int count2;
-            SqlConnection Conn = new SqlConnection(ConStr);
-            Conn.Open();
-            using (var cmd = Conn.CreateCommand())
-            {
-                cmd.CommandText = "SELECT  COUNT( * ) FROM  vid WHERE vid_animal IS NULL";
-                count2 = Int32.Parse(cmd.ExecuteScalar().ToString());
-            }
-            Conn.Close();
-            return count2;
-        }
-        public int DBcacpacity()
-        {
-            int count;
-            SqlConnection Conn = new SqlConnection(ConStr);
-            Conn.Open();
-            using (var cmd = Conn.CreateCommand())
-            {
-                cmd.CommandText = "SELECT  COUNT( * ) FROM  vid ";
-                count = Int32.Parse(cmd.ExecuteScalar().ToString());
-            }
-            Conn.Close();
-            return count;
-        }
 
         /// <summary>
         /// получает папки для рабочего стола в Tree
@@ -296,20 +251,16 @@ namespace Animal_Detection
             string path = null;
             path = fullPath;
             InsertFiles(path); // Инсертит в БД
-            Form2 form2=new Form2(); ;
-            form2.Show();
-            //PyLaunch();        // Запускет питоновский файл из Bin
+            exeLaunch();
+            Form2 form2=new Form2(); 
+            form2.Show(); // Запускет питоновский файл из Bin
             this.Visible = false;
 
-            int allDB = DBcacpacity();
-            int count;
-            do
+            FileInfo fileInf1 = new FileInfo(fpath);
+            while (!fileInf1.Exists)
             {
-                count = WaitNoNull();
                 System.Threading.Thread.Sleep(1000);
-
-            } while (count != 0);
-
+            }
             Form3 form3 = new Form3(); ;
             form3.Show();
 
