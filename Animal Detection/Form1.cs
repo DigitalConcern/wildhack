@@ -27,10 +27,10 @@ namespace Animal_Detection
         {
             
             InitializeComponent();
-            //treeView1.BeforeSelect += treeView1_BeforeSelect;
-            //treeView1.BeforeExpand += treeView1_BeforeExpand;
+            treeView1.BeforeSelect += treeView1_BeforeSelect;
+            treeView1.BeforeExpand += treeView1_BeforeExpand;
             // заполняем дерево дисками
-            //FillDriveNodes();
+            FillDriveNodes();
 
             
         }
@@ -295,7 +295,6 @@ namespace Animal_Detection
         {
             string path = null;
             path = fullPath;
-
             InsertFiles(path); // Инсертит в БД
             Form2 form2=new Form2(); ;
             form2.Show();
@@ -323,6 +322,7 @@ namespace Animal_Detection
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
+                    fullPath = "";
                     string path_1 = dialog.SelectedPath;
                     string f = "Папка:   ";
                     textBox1.Text = f + System.IO.Path.GetFileName(dialog.SelectedPath).ToString();
@@ -332,10 +332,25 @@ namespace Animal_Detection
             }
 
         }
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == System.Windows.Forms.FormWindowState.Maximized)
+            {
+                this.tableLayoutPanel1.Size = ClientSize;
+            }
+            if (this.WindowState == System.Windows.Forms.FormWindowState.Minimized)
+            {
+                this.tableLayoutPanel1.Size = ClientSize;
+            }
+
+        }
+
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        
     }
 }
