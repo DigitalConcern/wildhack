@@ -57,7 +57,8 @@ namespace Animal_Detection
             {   if (file.Name.ToLowerInvariant().Contains(".avi") ||
                     file.Name.ToLowerInvariant().Contains(".mov") ||
                     file.Name.ToLowerInvariant().Contains(".jpg") ||
-                    file.Name.ToLowerInvariant().Contains(".jpeg"))
+                    file.Name.ToLowerInvariant().Contains(".jpeg") ||
+                    file.Name.ToLowerInvariant().Contains(".png"))
                 files.Add(file.FullName);
             }
 
@@ -65,15 +66,18 @@ namespace Animal_Detection
             if (fileInf.Exists)
             {
                 fileInf.Delete();
-            }
-            System.IO.File.Create(fpath);
+            } 
+            
+            //System.IO.File.Create(fpath);
             StreamWriter f = new StreamWriter(fpath);
             int id = 0;
             foreach (string filename in files)
             {
-                string res = id.ToString() + ":"+ filename+":";
-                f.WriteLine(res); 
+                string res = id.ToString() + "|"+ filename+"|";
+                f.WriteLine(res);
+                id++;
             }
+            f.Close();
     
         }
 
@@ -83,17 +87,17 @@ namespace Animal_Detection
         public void SortFiles(string path)
         {
     
-            int count= System.IO.File.ReadAllLines(fpath).Length;
+            int count= System.IO.File.ReadAllLines(fpathres).Length;
             string goodPath = path + @"\Good";
             string badPath = path + @"\Bad";
             string soPath = path + @"\So-so";
             if (!Directory.Exists(goodPath)) Directory.CreateDirectory(goodPath);
             if (!Directory.Exists(badPath)) Directory.CreateDirectory(badPath);
             if (!Directory.Exists(soPath)) Directory.CreateDirectory(soPath);
-            foreach (string str in System.IO.File.ReadLines(fpath))
+            foreach (string str in System.IO.File.ReadLines(fpathres))
             {
                 string sub = str.Trim();
-                string[] words = str.Split(new char[] { ':' });
+                string[] words = str.Split(new char[] { '|' });
                 string p = words[2];
                 string addr = words[1];
                 FileInfo fileInf = new FileInfo(addr);
@@ -254,10 +258,19 @@ namespace Animal_Detection
             exeLaunch();
             Form2 form2=new Form2(); 
             form2.Show(); // Запускет питоновский файл из Bin
+            form2.PB();
             this.Visible = false;
+            FileInfo fileInf12 = new FileInfo(fpathres);
+
+            while (!fileInf12.Exists)
+            {
+                System.Threading.Thread.Sleep(1000);
+                fileInf12 = new FileInfo(fpathres);
+            }
+            form2.buttON();
 
             FileInfo fileInf1 = new FileInfo(fpath);
-            while (!fileInf1.Exists)
+            while (!fileInf1.Exists&&form2.IsDisposed)
             {
                 System.Threading.Thread.Sleep(1000);
             }

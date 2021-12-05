@@ -20,31 +20,32 @@ namespace Animal_Detection
             InitializeComponent();
             button1.Enabled = false;
             int count = System.IO.File.ReadAllLines(fpath).Length;
-            string path = System.IO.File.ReadLines(fpath).First().Trim().Split(':')[1];
+            string path = System.IO.File.ReadLines(fpath).First().Trim().Split('|')[1];
 
             pictureBox1.Image = Image.FromFile(path);
             progressBar1.Maximum = count;
             progressBar1.Value = 0;
             progressBar1.Step = 1;
-
+        }  
             
-            do
-            {
-                progressBar1.PerformStep();
-                System.Threading.Thread.Sleep(5000);
+        public void PB()
+        {
+                while (progressBar1.Value != progressBar1.Maximum)
+                {
+                    progressBar1.PerformStep();
+                    System.Threading.Thread.Sleep(5000);
 
-            } while (count != 0);
+                }
+         }
 
  
-            FileInfo fileInf1 = new FileInfo(fpath);
-            while (!fileInf1.Exists)
-            {
-                System.Threading.Thread.Sleep(1000);
-            }
+
+
+        
+        public void buttON()
+        {
             button1.Enabled = true;
-
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
